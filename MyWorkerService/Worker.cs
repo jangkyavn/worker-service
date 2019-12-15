@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.SignalR.Client;
 using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Logging;
+using Newtonsoft.Json;
 using System;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -33,14 +34,6 @@ namespace MyWorkerService
                 })
                 .Build();
 
-            _logger.LogInformation("Connected at: {time}", DateTimeOffset.Now);
-
-            //connection.Closed += async (error) =>
-            //{
-            //    await Task.Delay(new Random().Next(0, 5) * 1000);
-            //    await connection.StartAsync();
-            //};
-
             return base.StartAsync(cancellationToken);
         }
 
@@ -62,6 +55,15 @@ namespace MyWorkerService
                 {
                     LoginReponse loginReponse = await response.Content.ReadAsAsync<LoginReponse>();
                     _accessToken = loginReponse.Token;
+
+                    client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", _accessToken);
+                    HttpResponseMessage productResponse = await client.GetAsync("api/Product");
+                    if (productResponse.IsSuccessStatusCode)
+                    {
+                        Product[] products = await productResponse.Content.ReadAsAsync<Product[]>();
+
+                        _logger.LogInformation("products: {0}", JsonConvert.SerializeObject(products));
+                    }
                 }
             }
         }
@@ -87,7 +89,6 @@ namespace MyWorkerService
 
             //    await Task.Delay(0, stoppingToken);
             //}
-            _logger.LogInformation("Execute at: {time}", DateTimeOffset.Now);
 
             connection.On<string>("ReceiveMessage1", (message) =>
             {
@@ -101,6 +102,12 @@ namespace MyWorkerService
         {
             return true;
         }
+    }
+
+    public class Product
+    {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
     }
 
     public class LoginReponse
