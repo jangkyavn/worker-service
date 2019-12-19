@@ -1,3 +1,3 @@
 ﻿ADO.NET: https://tuhocict.com/thuc-thi-truy-van-sql-trong-c-lop-sqlcommand/
 Create Services in Windows: sc.exe create MyWorkerService binpath= C:\temp\MyWorkerService\MyWorkerService.exe start= auto
-Delete Service in Windows: sc.txt delete MyWorkerService
+Delete Service in Windows: sc.exe delete MyWorkerService
