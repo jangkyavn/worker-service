@@ -60,7 +60,7 @@ namespace MyWorkerService
 
         private async Task SignBillAsync()
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
                 SqlCommand command = new SqlCommand("SELECT * FROM Bills where ApproveStatus = 7", connection);
@@ -132,7 +132,7 @@ namespace MyWorkerService
                             }
                         }
 
-                        using (var client = new HttpClient())
+                        using (HttpClient client = new HttpClient())
                         {
                             client.BaseAddress = new Uri(_baseUrl);
                             client.DefaultRequestHeaders.Accept.Clear();
@@ -161,7 +161,7 @@ namespace MyWorkerService
 
         private async Task SignRecordAsync()
         {
-            using (var connection = new SqlConnection(_connectionString))
+            using (SqlConnection connection = new SqlConnection(_connectionString))
             {
                 await connection.OpenAsync();
                 SqlCommand command = new SqlCommand("SELECT * FROM Records where ApproveStatus = 7", connection);
@@ -233,7 +233,7 @@ namespace MyWorkerService
                             }
                         }
 
-                        using (var client = new HttpClient())
+                        using (HttpClient client = new HttpClient())
                         {
                             client.BaseAddress = new Uri(_baseUrl);
                             client.DefaultRequestHeaders.Accept.Clear();
