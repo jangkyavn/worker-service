@@ -9,6 +9,7 @@ using System.Data.SqlClient;
 using System.Drawing;
 using System.IO;
 using System.Linq;
+using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Threading;
@@ -19,8 +20,10 @@ namespace MyWorkerService
     public class Worker : BackgroundService
     {
         private readonly ILogger<Worker> _logger;
-        private string _baseUrl = "https://localhost:44383/";
+        // private string _baseUrl = "https://localhost:44383/";
+        private string _baseUrl = "http://hoadon.dvbk.vn/";
         private string _connectionString = "Server=117.7.227.159;Database=ElectronicBill;User Id=sa;Password=Bach@khoa;MultipleActiveResultSets=true";
+        // private string _connectionString = "Server=103.63.109.19;Database=VanLanElectronicBill;User Id=sa;Password=PhanMem@BachKhoa;MultipleActiveResultSets=true";
 
         public Worker(ILogger<Worker> logger)
         {
@@ -65,6 +68,7 @@ namespace MyWorkerService
                 await connection.OpenAsync();
                 SqlCommand command = new SqlCommand("SELECT * FROM Bills where ApproveStatus = 7", connection);
                 SqlDataReader sqlDataReader = await command.ExecuteReaderAsync();
+                _logger.LogInformation("HasRows: {0}", sqlDataReader.HasRows);
                 if (sqlDataReader.HasRows)
                 {
                     if (sqlDataReader.Read())
