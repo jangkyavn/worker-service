@@ -1,152 +1,205 @@
-2019-12-20 14:55:53.251 +07:00 [INF] Starting up service
-2019-12-20 14:55:53.496 +07:00 [INF] Service Started at: "2019-12-20T14:55:53.4840741+07:00"
-2019-12-20 14:55:53.835 +07:00 [INF] HasRows: true
-2019-12-20 14:55:57.706 +07:00 [ERR] Error Post Data: System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
- ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure.
-   at System.Net.Security.SslStream.StartSendAuthResetSignal(ProtocolToken message, AsyncProtocolRequest asyncRequest, ExceptionDispatchInfo exception)
-   at System.Net.Security.SslStream.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.ProcessReceivedBlob(Byte[] buffer, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.ProcessReceivedBlob(Byte[] buffer, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.PartialFrameCallback(AsyncProtocolRequest asyncRequest)
---- End of stack trace from previous location where exception was thrown ---
-   at System.Net.Security.SslStream.ThrowIfExceptional()
-   at System.Net.Security.SslStream.InternalEndProcessAuthentication(LazyAsyncResult lazyResult)
-   at System.Net.Security.SslStream.EndProcessAuthentication(IAsyncResult result)
-   at System.Net.Security.SslStream.EndAuthenticateAsClient(IAsyncResult asyncResult)
-   at System.Net.Security.SslStream.<>c.<AuthenticateAsClientAsync>b__65_1(IAsyncResult iar)
-   at System.Threading.Tasks.TaskFactory`1.FromAsyncCoreLogic(IAsyncResult iar, Func`2 endFunction, Action`1 endAction, Task`1 promise, Boolean requiresSynchronization)
---- End of stack trace from previous location where exception was thrown ---
-   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsyncCore(Stream stream, SslClientAuthenticationOptions sslOptions, CancellationToken cancellationToken)
-   --- End of inner exception stack trace ---
-   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsyncCore(Stream stream, SslClientAuthenticationOptions sslOptions, CancellationToken cancellationToken)
-   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean allowHttp2, CancellationToken cancellationToken)
-   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-   at System.Net.Http.HttpConnectionPool.GetHttpConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
-   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
-   at MyWorkerService.Worker.SignBillAsync() in D:\git\worker-service\MyWorkerService\Worker.cs:line 150
-2019-12-20 14:55:57.711 +07:00 [INF] Update Bill has Id = 8bdfc23b-468c-46bf-4027-08d785201647
-2019-12-20 14:55:58.828 +07:00 [INF] HasRows: true
-2019-12-20 14:55:59.924 +07:00 [ERR] Error Post Data: System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
- ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure.
-   at System.Net.Security.SslStream.StartSendAuthResetSignal(ProtocolToken message, AsyncProtocolRequest asyncRequest, ExceptionDispatchInfo exception)
-   at System.Net.Security.SslStream.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.ProcessReceivedBlob(Byte[] buffer, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.ProcessReceivedBlob(Byte[] buffer, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.ProcessReceivedBlob(Byte[] buffer, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.PartialFrameCallback(AsyncProtocolRequest asyncRequest)
---- End of stack trace from previous location where exception was thrown ---
-   at System.Net.Security.SslStream.ThrowIfExceptional()
-   at System.Net.Security.SslStream.InternalEndProcessAuthentication(LazyAsyncResult lazyResult)
-   at System.Net.Security.SslStream.EndProcessAuthentication(IAsyncResult result)
-   at System.Net.Security.SslStream.EndAuthenticateAsClient(IAsyncResult asyncResult)
-   at System.Net.Security.SslStream.<>c.<AuthenticateAsClientAsync>b__65_1(IAsyncResult iar)
-   at System.Threading.Tasks.TaskFactory`1.FromAsyncCoreLogic(IAsyncResult iar, Func`2 endFunction, Action`1 endAction, Task`1 promise, Boolean requiresSynchronization)
---- End of stack trace from previous location where exception was thrown ---
-   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsyncCore(Stream stream, SslClientAuthenticationOptions sslOptions, CancellationToken cancellationToken)
-   --- End of inner exception stack trace ---
-   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsyncCore(Stream stream, SslClientAuthenticationOptions sslOptions, CancellationToken cancellationToken)
-   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean allowHttp2, CancellationToken cancellationToken)
-   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-   at System.Net.Http.HttpConnectionPool.GetHttpConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
-   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
-   at MyWorkerService.Worker.SignBillAsync() in D:\git\worker-service\MyWorkerService\Worker.cs:line 150
-2019-12-20 14:55:59.924 +07:00 [INF] Update Bill has Id = 8bdfc23b-468c-46bf-4027-08d785201647
-2019-12-20 14:56:01.013 +07:00 [INF] HasRows: true
-2019-12-20 14:56:02.102 +07:00 [ERR] Error Post Data: System.Net.Http.HttpRequestException: The SSL connection could not be established, see inner exception.
- ---> System.Security.Authentication.AuthenticationException: The remote certificate is invalid according to the validation procedure.
-   at System.Net.Security.SslStream.StartSendAuthResetSignal(ProtocolToken message, AsyncProtocolRequest asyncRequest, ExceptionDispatchInfo exception)
-   at System.Net.Security.SslStream.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.ProcessReceivedBlob(Byte[] buffer, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.ProcessReceivedBlob(Byte[] buffer, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReceiveBlob(Byte[] buffer, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.CheckCompletionBeforeNextReceive(ProtocolToken message, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartSendBlob(Byte[] incoming, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.ProcessReceivedBlob(Byte[] buffer, Int32 count, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.StartReadFrame(Byte[] buffer, Int32 readBytes, AsyncProtocolRequest asyncRequest)
-   at System.Net.Security.SslStream.PartialFrameCallback(AsyncProtocolRequest asyncRequest)
---- End of stack trace from previous location where exception was thrown ---
-   at System.Net.Security.SslStream.ThrowIfExceptional()
-   at System.Net.Security.SslStream.InternalEndProcessAuthentication(LazyAsyncResult lazyResult)
-   at System.Net.Security.SslStream.EndProcessAuthentication(IAsyncResult result)
-   at System.Net.Security.SslStream.EndAuthenticateAsClient(IAsyncResult asyncResult)
-   at System.Net.Security.SslStream.<>c.<AuthenticateAsClientAsync>b__65_1(IAsyncResult iar)
-   at System.Threading.Tasks.TaskFactory`1.FromAsyncCoreLogic(IAsyncResult iar, Func`2 endFunction, Action`1 endAction, Task`1 promise, Boolean requiresSynchronization)
---- End of stack trace from previous location where exception was thrown ---
-   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsyncCore(Stream stream, SslClientAuthenticationOptions sslOptions, CancellationToken cancellationToken)
-   --- End of inner exception stack trace ---
-   at System.Net.Http.ConnectHelper.EstablishSslConnectionAsyncCore(Stream stream, SslClientAuthenticationOptions sslOptions, CancellationToken cancellationToken)
-   at System.Net.Http.HttpConnectionPool.ConnectAsync(HttpRequestMessage request, Boolean allowHttp2, CancellationToken cancellationToken)
-   at System.Net.Http.HttpConnectionPool.CreateHttp11ConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-   at System.Net.Http.HttpConnectionPool.GetHttpConnectionAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-   at System.Net.Http.HttpConnectionPool.SendWithRetryAsync(HttpRequestMessage request, Boolean doRequestAuth, CancellationToken cancellationToken)
-   at System.Net.Http.RedirectHandler.SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-   at System.Net.Http.HttpClient.FinishSendAsyncBuffered(Task`1 sendTask, HttpRequestMessage request, CancellationTokenSource cts, Boolean disposeCts)
-   at MyWorkerService.Worker.SignBillAsync() in D:\git\worker-service\MyWorkerService\Worker.cs:line 150
-2019-12-20 14:56:02.103 +07:00 [INF] Update Bill has Id = 8bdfc23b-468c-46bf-4027-08d785201647
-2019-12-20 14:56:02.710 +07:00 [INF] Service Stopped at: "2019-12-20T14:56:02.7100050+07:00"
-2019-12-20 14:57:19.411 +07:00 [INF] Starting up service
-2019-12-20 14:57:19.630 +07:00 [INF] Service Started at: "2019-12-20T14:57:19.6220364+07:00"
-2019-12-20 14:57:19.864 +07:00 [INF] HasRows: true
-2019-12-20 14:57:25.141 +07:00 [INF] Update Bill has Id = 8bdfc23b-468c-46bf-4027-08d785201647
-2019-12-20 14:57:26.245 +07:00 [INF] HasRows: false
-2019-12-20 14:57:27.259 +07:00 [INF] HasRows: false
-2019-12-20 14:57:28.266 +07:00 [INF] HasRows: false
-2019-12-20 14:57:29.274 +07:00 [INF] HasRows: false
-2019-12-20 14:57:30.281 +07:00 [INF] HasRows: false
-2019-12-20 14:57:31.288 +07:00 [INF] HasRows: false
-2019-12-20 14:57:32.298 +07:00 [INF] HasRows: false
-2019-12-20 14:57:33.311 +07:00 [INF] HasRows: false
-2019-12-20 14:57:34.324 +07:00 [INF] HasRows: false
-2019-12-20 14:57:35.330 +07:00 [INF] HasRows: false
-2019-12-20 14:57:36.336 +07:00 [INF] HasRows: false
-2019-12-20 14:57:37.342 +07:00 [INF] HasRows: false
-2019-12-20 14:57:38.349 +07:00 [INF] HasRows: false
-2019-12-20 14:57:39.362 +07:00 [INF] HasRows: false
-2019-12-20 14:57:40.370 +07:00 [INF] HasRows: false
-2019-12-20 14:57:41.382 +07:00 [INF] HasRows: false
-2019-12-20 14:57:42.400 +07:00 [INF] HasRows: false
-2019-12-20 14:57:43.412 +07:00 [INF] HasRows: false
-2019-12-20 14:57:44.417 +07:00 [INF] HasRows: false
-2019-12-20 14:57:45.421 +07:00 [INF] HasRows: false
-2019-12-20 14:57:46.426 +07:00 [INF] HasRows: false
-2019-12-20 14:57:47.430 +07:00 [INF] HasRows: false
-2019-12-20 14:57:48.435 +07:00 [INF] HasRows: false
-2019-12-20 14:57:49.439 +07:00 [INF] HasRows: false
-2019-12-20 14:57:50.443 +07:00 [INF] HasRows: false
-2019-12-20 14:57:51.449 +07:00 [INF] HasRows: false
-2019-12-20 14:57:52.455 +07:00 [INF] HasRows: false
-2019-12-20 14:57:53.460 +07:00 [INF] HasRows: false
-2019-12-20 14:57:54.476 +07:00 [INF] HasRows: false
-2019-12-20 14:57:55.491 +07:00 [INF] HasRows: false
-2019-12-20 14:57:56.495 +07:00 [INF] HasRows: false
-2019-12-20 14:57:57.499 +07:00 [INF] HasRows: false
-2019-12-20 14:57:58.503 +07:00 [INF] HasRows: false
-2019-12-20 14:57:59.507 +07:00 [INF] HasRows: false
-2019-12-20 14:58:00.510 +07:00 [INF] HasRows: false
-2019-12-20 14:58:01.050 +07:00 [INF] Service Stopped at: "2019-12-20T14:58:01.0500830+07:00"
+2019-12-21 08:02:19.677 +07:00 [INF] Starting up service
+2019-12-21 08:02:19.904 +07:00 [INF] Service Started at: "2019-12-21T08:02:19.8950544+07:00"
+2019-12-21 08:02:20.139 +07:00 [INF] HasRows: true
+2019-12-21 08:02:52.727 +07:00 [INF] Service Stopped at: "2019-12-21T08:02:52.7275531+07:00"
+2019-12-21 08:03:12.888 +07:00 [INF] Starting up service
+2019-12-21 08:03:14.041 +07:00 [INF] Service Started at: "2019-12-21T08:03:14.0229063+07:00"
+2019-12-21 08:03:22.639 +07:00 [INF] Starting up service
+2019-12-21 08:03:23.746 +07:00 [INF] Service Started at: "2019-12-21T08:03:23.7309177+07:00"
+2019-12-21 08:03:28.731 +07:00 [INF] HasRows: true
+2019-12-21 08:06:05.869 +07:00 [INF] Starting up service
+2019-12-21 08:06:06.077 +07:00 [INF] Service Started at: "2019-12-21T08:06:06.0686929+07:00"
+2019-12-21 08:06:06.425 +07:00 [INF] HasRows: true
+2019-12-21 08:06:17.943 +07:00 [INF] Service Stopped at: "2019-12-21T08:06:17.9428391+07:00"
+2019-12-21 08:06:30.531 +07:00 [INF] Starting up service
+2019-12-21 08:06:31.470 +07:00 [INF] Service Started at: "2019-12-21T08:06:31.4546599+07:00"
+2019-12-21 08:06:46.750 +07:00 [INF] Starting up service
+2019-12-21 08:06:46.959 +07:00 [INF] Service Started at: "2019-12-21T08:06:46.9506549+07:00"
+2019-12-21 08:06:47.161 +07:00 [INF] HasRows: true
+2019-12-21 08:06:53.389 +07:00 [INF] Update Bill has Id = c7816a24-ae12-47f4-ae65-08d7855fb871
+2019-12-21 08:06:54.433 +07:00 [INF] HasRows: true
+2019-12-21 08:06:56.495 +07:00 [INF] Update Bill has Id = a6538ce6-4550-47c0-b35a-08d785b04a15
+2019-12-21 08:06:57.575 +07:00 [INF] HasRows: false
+2019-12-21 08:06:58.645 +07:00 [INF] HasRows: false
+2019-12-21 08:06:59.703 +07:00 [INF] HasRows: false
+2019-12-21 08:07:00.716 +07:00 [INF] HasRows: false
+2019-12-21 08:07:01.722 +07:00 [INF] HasRows: false
+2019-12-21 08:07:02.729 +07:00 [INF] HasRows: false
+2019-12-21 08:07:03.783 +07:00 [INF] HasRows: false
+2019-12-21 08:07:04.794 +07:00 [INF] HasRows: false
+2019-12-21 08:07:05.799 +07:00 [INF] HasRows: false
+2019-12-21 08:07:06.804 +07:00 [INF] HasRows: false
+2019-12-21 08:07:07.811 +07:00 [INF] HasRows: false
+2019-12-21 08:07:08.819 +07:00 [INF] HasRows: false
+2019-12-21 08:07:09.826 +07:00 [INF] HasRows: false
+2019-12-21 08:07:10.834 +07:00 [INF] HasRows: false
+2019-12-21 08:07:11.854 +07:00 [INF] HasRows: false
+2019-12-21 08:07:12.859 +07:00 [INF] HasRows: false
+2019-12-21 08:07:13.863 +07:00 [INF] HasRows: false
+2019-12-21 08:07:14.868 +07:00 [INF] HasRows: false
+2019-12-21 08:07:15.874 +07:00 [INF] HasRows: false
+2019-12-21 08:07:16.884 +07:00 [INF] HasRows: false
+2019-12-21 08:07:17.889 +07:00 [INF] HasRows: false
+2019-12-21 08:07:18.286 +07:00 [INF] Service Stopped at: "2019-12-21T08:07:18.2862318+07:00"
+2019-12-21 08:24:38.534 +07:00 [INF] Starting up service
+2019-12-21 08:24:38.758 +07:00 [INF] Service Started at: "2019-12-21T08:24:38.7496095+07:00"
+2019-12-21 08:24:39.040 +07:00 [INF] HasRows: false
+2019-12-21 08:24:40.075 +07:00 [INF] HasRows: false
+2019-12-21 08:24:41.091 +07:00 [INF] HasRows: false
+2019-12-21 08:24:42.106 +07:00 [INF] HasRows: false
+2019-12-21 08:24:43.125 +07:00 [INF] HasRows: false
+2019-12-21 08:24:44.134 +07:00 [INF] HasRows: false
+2019-12-21 08:24:45.139 +07:00 [INF] HasRows: false
+2019-12-21 08:24:46.144 +07:00 [INF] HasRows: false
+2019-12-21 08:24:47.153 +07:00 [INF] HasRows: false
+2019-12-21 08:24:48.160 +07:00 [INF] HasRows: false
+2019-12-21 08:24:49.168 +07:00 [INF] HasRows: false
+2019-12-21 08:24:50.176 +07:00 [INF] HasRows: false
+2019-12-21 08:24:51.184 +07:00 [INF] HasRows: false
+2019-12-21 08:24:52.192 +07:00 [INF] HasRows: false
+2019-12-21 08:24:53.200 +07:00 [INF] HasRows: false
+2019-12-21 08:24:54.208 +07:00 [INF] HasRows: false
+2019-12-21 08:24:55.217 +07:00 [INF] HasRows: false
+2019-12-21 08:24:56.223 +07:00 [INF] HasRows: false
+2019-12-21 08:24:57.253 +07:00 [INF] HasRows: false
+2019-12-21 08:24:58.271 +07:00 [INF] HasRows: false
+2019-12-21 08:24:59.275 +07:00 [INF] HasRows: false
+2019-12-21 08:25:00.280 +07:00 [INF] HasRows: false
+2019-12-21 08:25:01.285 +07:00 [INF] HasRows: false
+2019-12-21 08:25:02.289 +07:00 [INF] HasRows: false
+2019-12-21 08:25:03.294 +07:00 [INF] HasRows: false
+2019-12-21 08:25:04.299 +07:00 [INF] HasRows: false
+2019-12-21 08:25:05.303 +07:00 [INF] HasRows: false
+2019-12-21 08:25:06.307 +07:00 [INF] HasRows: false
+2019-12-21 08:25:07.311 +07:00 [INF] HasRows: false
+2019-12-21 08:25:08.315 +07:00 [INF] HasRows: false
+2019-12-21 08:25:09.322 +07:00 [INF] HasRows: false
+2019-12-21 08:25:10.334 +07:00 [INF] HasRows: false
+2019-12-21 08:25:11.337 +07:00 [INF] HasRows: false
+2019-12-21 08:25:12.343 +07:00 [INF] HasRows: false
+2019-12-21 08:25:13.347 +07:00 [INF] HasRows: false
+2019-12-21 08:25:14.352 +07:00 [INF] HasRows: false
+2019-12-21 08:25:15.363 +07:00 [INF] HasRows: false
+2019-12-21 08:25:16.368 +07:00 [INF] HasRows: false
+2019-12-21 08:25:17.371 +07:00 [INF] HasRows: false
+2019-12-21 08:25:18.375 +07:00 [INF] HasRows: false
+2019-12-21 08:25:19.378 +07:00 [INF] HasRows: false
+2019-12-21 08:25:20.383 +07:00 [INF] HasRows: false
+2019-12-21 08:25:21.387 +07:00 [INF] HasRows: false
+2019-12-21 08:25:22.392 +07:00 [INF] HasRows: false
+2019-12-21 08:25:23.396 +07:00 [INF] HasRows: false
+2019-12-21 08:25:24.400 +07:00 [INF] HasRows: false
+2019-12-21 08:25:25.404 +07:00 [INF] HasRows: false
+2019-12-21 08:25:26.408 +07:00 [INF] HasRows: false
+2019-12-21 08:25:27.412 +07:00 [INF] HasRows: false
+2019-12-21 08:25:28.417 +07:00 [INF] HasRows: false
+2019-12-21 08:25:29.421 +07:00 [INF] HasRows: false
+2019-12-21 08:25:30.429 +07:00 [INF] HasRows: false
+2019-12-21 08:25:31.433 +07:00 [INF] HasRows: false
+2019-12-21 08:25:32.447 +07:00 [INF] HasRows: false
+2019-12-21 08:25:33.452 +07:00 [INF] HasRows: false
+2019-12-21 08:25:34.457 +07:00 [INF] HasRows: false
+2019-12-21 08:25:35.489 +07:00 [INF] HasRows: false
+2019-12-21 08:25:36.497 +07:00 [INF] HasRows: false
+2019-12-21 08:25:37.504 +07:00 [INF] HasRows: false
+2019-12-21 08:25:38.511 +07:00 [INF] HasRows: false
+2019-12-21 08:25:39.515 +07:00 [INF] HasRows: false
+2019-12-21 08:25:40.519 +07:00 [INF] HasRows: false
+2019-12-21 08:25:41.524 +07:00 [INF] HasRows: false
+2019-12-21 08:25:42.528 +07:00 [INF] HasRows: false
+2019-12-21 08:25:43.533 +07:00 [INF] HasRows: false
+2019-12-21 08:25:44.537 +07:00 [INF] HasRows: false
+2019-12-21 08:25:45.542 +07:00 [INF] HasRows: false
+2019-12-21 08:25:46.545 +07:00 [INF] HasRows: false
+2019-12-21 08:25:47.550 +07:00 [INF] HasRows: false
+2019-12-21 08:25:48.555 +07:00 [INF] HasRows: false
+2019-12-21 08:25:49.559 +07:00 [INF] HasRows: false
+2019-12-21 08:25:50.563 +07:00 [INF] HasRows: false
+2019-12-21 08:25:51.567 +07:00 [INF] HasRows: false
+2019-12-21 08:25:52.571 +07:00 [INF] HasRows: false
+2019-12-21 08:25:53.575 +07:00 [INF] HasRows: false
+2019-12-21 08:25:54.580 +07:00 [INF] HasRows: false
+2019-12-21 08:25:55.584 +07:00 [INF] HasRows: false
+2019-12-21 08:25:56.589 +07:00 [INF] HasRows: false
+2019-12-21 08:25:57.594 +07:00 [INF] HasRows: false
+2019-12-21 08:25:58.599 +07:00 [INF] HasRows: false
+2019-12-21 08:25:59.604 +07:00 [INF] HasRows: false
+2019-12-21 08:26:00.607 +07:00 [INF] HasRows: false
+2019-12-21 08:26:01.612 +07:00 [INF] HasRows: false
+2019-12-21 08:26:02.618 +07:00 [INF] HasRows: false
+2019-12-21 08:26:03.623 +07:00 [INF] HasRows: false
+2019-12-21 08:26:04.627 +07:00 [INF] HasRows: false
+2019-12-21 08:26:05.631 +07:00 [INF] HasRows: false
+2019-12-21 08:26:06.636 +07:00 [INF] HasRows: false
+2019-12-21 08:26:07.640 +07:00 [INF] HasRows: false
+2019-12-21 08:26:08.669 +07:00 [INF] HasRows: false
+2019-12-21 08:26:09.674 +07:00 [INF] HasRows: false
+2019-12-21 08:26:10.678 +07:00 [INF] HasRows: false
+2019-12-21 08:26:11.682 +07:00 [INF] HasRows: false
+2019-12-21 08:26:12.691 +07:00 [INF] HasRows: false
+2019-12-21 08:26:13.697 +07:00 [INF] HasRows: false
+2019-12-21 08:26:14.701 +07:00 [INF] HasRows: false
+2019-12-21 08:26:15.706 +07:00 [INF] HasRows: false
+2019-12-21 08:26:16.711 +07:00 [INF] HasRows: false
+2019-12-21 08:26:17.716 +07:00 [INF] HasRows: false
+2019-12-21 08:26:18.721 +07:00 [INF] HasRows: false
+2019-12-21 08:26:19.726 +07:00 [INF] HasRows: false
+2019-12-21 08:26:20.731 +07:00 [INF] HasRows: false
+2019-12-21 08:26:21.734 +07:00 [INF] HasRows: false
+2019-12-21 08:26:22.739 +07:00 [INF] HasRows: false
+2019-12-21 08:26:23.743 +07:00 [INF] HasRows: false
+2019-12-21 08:26:24.747 +07:00 [INF] HasRows: false
+2019-12-21 08:26:25.750 +07:00 [INF] HasRows: false
+2019-12-21 08:26:26.754 +07:00 [INF] HasRows: false
+2019-12-21 08:26:27.759 +07:00 [INF] HasRows: false
+2019-12-21 08:26:28.763 +07:00 [INF] HasRows: false
+2019-12-21 08:26:29.767 +07:00 [INF] HasRows: false
+2019-12-21 08:26:30.771 +07:00 [INF] HasRows: false
+2019-12-21 08:26:31.776 +07:00 [INF] HasRows: false
+2019-12-21 08:26:32.781 +07:00 [INF] HasRows: false
+2019-12-21 08:26:33.784 +07:00 [INF] HasRows: false
+2019-12-21 08:26:34.795 +07:00 [INF] HasRows: false
+2019-12-21 08:26:35.805 +07:00 [INF] HasRows: false
+2019-12-21 08:26:36.810 +07:00 [INF] HasRows: false
+2019-12-21 08:26:37.813 +07:00 [INF] HasRows: false
+2019-12-21 08:27:09.495 +07:00 [INF] Service Stopped at: "2019-12-21T08:27:09.4957485+07:00"
+2019-12-21 08:27:20.435 +07:00 [INF] Starting up service
+2019-12-21 08:27:21.435 +07:00 [INF] Service Started at: "2019-12-21T08:27:21.4176420+07:00"
+2019-12-21 08:27:22.148 +07:00 [INF] HasRows: false
+2019-12-21 08:27:59.105 +07:00 [INF] Starting up service
+2019-12-21 08:27:59.329 +07:00 [INF] Service Started at: "2019-12-21T08:27:59.3206994+07:00"
+2019-12-21 08:27:59.550 +07:00 [INF] HasRows: false
+2019-12-21 08:28:03.437 +07:00 [INF] Update Record has Id = 5906935a-3a59-4a88-2073-08d785b4bf04
+2019-12-21 08:28:04.468 +07:00 [INF] HasRows: false
+2019-12-21 08:28:05.492 +07:00 [INF] HasRows: false
+2019-12-21 08:28:06.500 +07:00 [INF] HasRows: false
+2019-12-21 08:28:07.508 +07:00 [INF] HasRows: false
+2019-12-21 08:28:08.515 +07:00 [INF] HasRows: false
+2019-12-21 08:28:09.521 +07:00 [INF] HasRows: false
+2019-12-21 08:28:10.529 +07:00 [INF] HasRows: false
+2019-12-21 08:28:11.537 +07:00 [INF] HasRows: false
+2019-12-21 08:28:12.546 +07:00 [INF] HasRows: false
+2019-12-21 08:28:13.555 +07:00 [INF] HasRows: false
+2019-12-21 08:28:14.562 +07:00 [INF] HasRows: false
+2019-12-21 08:28:15.590 +07:00 [INF] HasRows: false
+2019-12-21 08:28:16.599 +07:00 [INF] HasRows: false
+2019-12-21 08:28:17.608 +07:00 [INF] HasRows: false
+2019-12-21 08:28:18.615 +07:00 [INF] HasRows: false
+2019-12-21 08:28:19.624 +07:00 [INF] HasRows: false
+2019-12-21 08:28:20.630 +07:00 [INF] HasRows: false
+2019-12-21 08:28:21.637 +07:00 [INF] HasRows: false
+2019-12-21 08:28:22.650 +07:00 [INF] HasRows: false
+2019-12-21 08:28:23.657 +07:00 [INF] HasRows: false
+2019-12-21 08:28:24.662 +07:00 [INF] HasRows: false
+2019-12-21 08:28:25.668 +07:00 [INF] HasRows: false
+2019-12-21 08:28:26.674 +07:00 [INF] HasRows: false
+2019-12-21 08:28:27.679 +07:00 [INF] HasRows: false
+2019-12-21 08:28:28.684 +07:00 [INF] HasRows: false
+2019-12-21 08:28:29.690 +07:00 [INF] HasRows: false
+2019-12-21 08:28:30.694 +07:00 [INF] HasRows: false
+2019-12-21 08:28:31.701 +07:00 [INF] HasRows: false
+2019-12-21 08:28:32.719 +07:00 [INF] HasRows: false
+2019-12-21 08:28:33.734 +07:00 [INF] HasRows: false
+2019-12-21 08:28:34.739 +07:00 [INF] HasRows: false
+2019-12-21 08:28:35.744 +07:00 [INF] HasRows: false
+2019-12-21 08:28:36.017 +07:00 [INF] Service Stopped at: "2019-12-21T08:28:36.0178983+07:00"
