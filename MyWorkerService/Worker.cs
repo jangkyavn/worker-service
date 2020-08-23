@@ -20,9 +20,9 @@ namespace MyWorkerService
     {
         private readonly ILogger<Worker> _logger;
         private string _baseUrl = "https://localhost:44383/";
-        // private string _baseUrl = "http://hoadon.dvbk.vn/";
-        private string _connectionString = "Server=117.7.227.159;Database=ElectronicBill;User Id=sa;Password=Bach@khoa;MultipleActiveResultSets=true";
-        // private string _connectionString = "Server=103.63.109.19;Database=VanLanElectronicBill;User Id=sa;Password=PhanMem@BachKhoa;MultipleActiveResultSets=true";
+        // private string _baseUrl = "https://demo.pmbk.vn/";
+        // private string _connectionString = "Server=117.7.227.159;Database=ElectronicBill2;User Id=sa;Password=Bach@khoa;MultipleActiveResultSets=true";
+        private string _connectionString = "Server=103.63.109.19;Database=DemoThreeInvoice;User Id=sa;Password=PhanMem@BachKhoa;MultipleActiveResultSets=true";
 
         public Worker(ILogger<Worker> logger)
         {
@@ -62,115 +62,122 @@ namespace MyWorkerService
 
         private async Task SignBillAsync()
         {
-            using (SqlConnection connection = new SqlConnection(_connectionString))
+            try
             {
-                await connection.OpenAsync();
-                SqlCommand billCommand = new SqlCommand("SELECT * FROM Bills where ApproveStatus = 7", connection);
-                SqlDataReader billReader = await billCommand.ExecuteReaderAsync();
-                _logger.LogInformation("HasRows: {0}", billReader.HasRows);
-                if (billReader.HasRows)
+                using (SqlConnection connection = new SqlConnection(_connectionString))
                 {
-                    if (billReader.Read())
+                    await connection.OpenAsync();
+                    using SqlCommand billCommand = new SqlCommand("SELECT * FROM Bills where ApproveStatus = 7", connection);
+                    SqlDataReader billReader = await billCommand.ExecuteReaderAsync();
+                    _logger.LogInformation("HasRows: {0}", billReader.HasRows);
+                    if (billReader.HasRows)
                     {
-                        Guid id = new Guid(billReader["Id"].ToString());
-
-                        SqlCommand billByteCommand = new SqlCommand($"SELECT * FROM BillBytes where BillId = '{id}'", connection);
-                        SqlDataReader billByteReader = await billByteCommand.ExecuteReaderAsync();
-
-                        if (billByteReader.HasRows)
+                        if (billReader.Read())
                         {
-                            if (billByteReader.Read())
+                            Guid id = new Guid(billReader["Id"].ToString());
+
+                            using SqlCommand billByteCommand = new SqlCommand($"SELECT * FROM BillBytes where BillId = '{id}'", connection);
+                            SqlDataReader billByteReader = await billByteCommand.ExecuteReaderAsync();
+
+                            if (billByteReader.HasRows)
                             {
-                                byte[] unsignFileByte = billByteReader["UnsignPdfByte"] as byte[];
-                                string unsignFileName = id + "unsign.pdf";
-
-                                await File.WriteAllBytesAsync(unsignFileName, unsignFileByte);
-
-                                // Load a PDF file and certificate
-                                PdfDocument pdf = new PdfDocument();
-                                pdf.LoadFromFile(unsignFileName);
-                                int end = pdf.Pages.Count - 1;
-                                PdfPageBase page = pdf.Pages[end];
-
-                                PdfCertificate cert = new PdfCertificate("dtbk.pfx", "DienTuBachKhoa");
-
-                                // Create a signature and set its position.
-                                PdfSignature signature = new PdfSignature(pdf, page, cert, "Dinh Vi Bach Khoa");
-                                signature.SignDetailsFont = new PdfTrueTypeFont(new Font("Times New Roman", 8f, FontStyle.Bold), true);
-                                signature.SignFontColor = Color.Red;
-
-                                signature.Bounds = new RectangleF(GetPositionSign(page), new SizeF(212, 40));
-                                signature.NameLabel = "Signature Valid\nKý bởi: ";
-                                signature.Name = string.Format("CT CP THIẾT BỊ ĐIỆN - ĐIỆN TỬ BÁCH KHOA\nNgày ký: {0}\n\n\n", DateTime.Now.ToString("dd/MM/yyyy"));
-                                signature.DistinguishedName = "ĐỊNH VỊ BÁCH KHOA";
-
-                                signature.ReasonLabel = "\nReason: ";
-                                signature.Reason = "Hóa đơn giá trị gia tăng";                                                      // Add
-
-                                signature.DateLabel = "\nNgày ký: ";
-                                signature.Date = DateTime.Now;
-
-                                signature.ContactInfoLabel = "Tổng đài CSKH: ";
-                                signature.ContactInfo = "1900 5555 13";                                                             // Add
-                                signature.LocationInfo = "Số 561 Nguyễn Bỉnh Khiêm, Hải An, Hải Phòng, Việt Nam";                   // Aad
-
-                                signature.Certificated = false;
-
-                                signature.DocumentPermissions = PdfCertificationFlags.ForbidChanges;
-
-                                string signedFileName = id + "signed" + ".pdf";
-                                pdf.SaveToFile(signedFileName);
-                                pdf.Close();
-
-                                SqlCommand updateBillCommand = new SqlCommand("UPDATE [dbo].[BillBytes] SET [SignedPdfByte] = @SignedPdfByte WHERE [BillId] = @BillId", connection);
-                                updateBillCommand.Parameters.AddWithValue("BillId", id);
-                                updateBillCommand.Parameters.AddWithValue("SignedPdfByte", File.ReadAllBytes(signedFileName));
-                                await updateBillCommand.ExecuteNonQueryAsync();
-
-                                if (!string.IsNullOrEmpty(unsignFileName))
+                                if (billByteReader.Read())
                                 {
-                                    if (File.Exists(unsignFileName))
-                                    {
-                                        File.Delete(unsignFileName);
-                                    }
-                                }
+                                    byte[] unsignFileByte = billByteReader["UnsignPdfByte"] as byte[];
+                                    string unsignFileName = id + "unsign.pdf";
 
-                                if (!string.IsNullOrEmpty(signedFileName))
-                                {
-                                    if (File.Exists(signedFileName))
-                                    {
-                                        File.Delete(signedFileName);
-                                    }
-                                }
+                                    await billByteReader.CloseAsync();
+                                    await File.WriteAllBytesAsync(unsignFileName, unsignFileByte);
 
-                                using (HttpClient client = new HttpClient())
-                                {
-                                    client.BaseAddress = new Uri(_baseUrl);
-                                    client.DefaultRequestHeaders.Accept.Clear();
-                                    client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+                                    // Load a PDF file and certificate
+                                    PdfDocument pdf = new PdfDocument();
+                                    pdf.LoadFromFile(unsignFileName);
+                                    int end = pdf.Pages.Count - 1;
+                                    PdfPageBase page = pdf.Pages[end];
 
-                                    try
+                                    PdfCertificate cert = new PdfCertificate("dtbk.pfx", "DienTuBachKhoa");
+
+                                    // Create a signature and set its position.
+                                    PdfSignature signature = new PdfSignature(pdf, page, cert, "Dinh Vi Bach Khoa");
+                                    signature.SignDetailsFont = new PdfTrueTypeFont(new Font("Times New Roman", 8f, FontStyle.Bold), true);
+                                    signature.SignFontColor = Color.Red;
+
+                                    signature.Bounds = new RectangleF(GetPositionSign(page), new SizeF(212, 40));
+                                    signature.NameLabel = "Signature Valid\nKý bởi: ";
+                                    signature.Name = string.Format("CT CP THIẾT BỊ ĐIỆN - ĐIỆN TỬ BÁCH KHOA\nNgày ký: {0}\n\n\n", DateTime.Now.ToString("dd/MM/yyyy"));
+                                    signature.DistinguishedName = "ĐỊNH VỊ BÁCH KHOA";
+
+                                    signature.ReasonLabel = "\nReason: ";
+                                    signature.Reason = "Hóa đơn giá trị gia tăng";                                                      // Add
+
+                                    signature.DateLabel = "\nNgày ký: ";
+                                    signature.Date = DateTime.Now;
+
+                                    signature.ContactInfoLabel = "Tổng đài CSKH: ";
+                                    signature.ContactInfo = "1900 5555 13";                                                             // Add
+                                    signature.LocationInfo = "Số 561 Nguyễn Bỉnh Khiêm, Hải An, Hải Phòng, Việt Nam";                   // Aad
+
+                                    signature.Certificated = false;
+
+                                    signature.DocumentPermissions = PdfCertificationFlags.ForbidChanges;
+
+                                    string signedFileName = id + "signed" + ".pdf";
+                                    pdf.SaveToFile(signedFileName);
+                                    pdf.Close();
+
+                                    using (SqlCommand updateBillCommand = new SqlCommand("UPDATE [dbo].[BillBytes] SET [SignedPdfByte] = @SignedPdfByte WHERE [BillId] = @BillId", connection))
                                     {
-                                        await client.PostAsJsonAsync("api/Bill/postSignedBill", new
+                                        updateBillCommand.Parameters.AddWithValue("BillId", id);
+                                        updateBillCommand.Parameters.AddWithValue("SignedPdfByte", File.ReadAllBytes(signedFileName));
+                                        await updateBillCommand.ExecuteNonQueryAsync();
+
+                                        if (!string.IsNullOrEmpty(unsignFileName))
                                         {
-                                            Id = id
-                                        });
-                                    }
-                                    catch (Exception ex)
-                                    {
-                                        _logger.LogError("Error Post Data: {0}", ex);
+                                            if (File.Exists(unsignFileName))
+                                            {
+                                                File.Delete(unsignFileName);
+                                            }
+                                        }
+
+                                        if (!string.IsNullOrEmpty(signedFileName))
+                                        {
+                                            if (File.Exists(signedFileName))
+                                            {
+                                                File.Delete(signedFileName);
+                                            }
+                                        }
+
+                                        using (HttpClient client = new HttpClient())
+                                        {
+                                            client.BaseAddress = new Uri(_baseUrl);
+                                            client.DefaultRequestHeaders.Accept.Clear();
+                                            client.DefaultRequestHeaders.Accept.Add(new MediaTypeWithQualityHeaderValue("application/json"));
+
+                                            using SqlCommand salerCommand = new SqlCommand($"SELECT TaxCode FROM Salers", connection);
+                                            var salerReader = await salerCommand.ExecuteScalarAsync();
+
+                                            await client.PostAsJsonAsync("api/Bill/postSignedBill", new
+                                            {
+                                                Id = id,
+                                                TaxCode = salerReader
+                                            });
+                                        }
+
+                                        await billByteReader.CloseAsync();
+
+                                        _logger.LogInformation("Update Bill has Id = {0}", id.ToString());
                                     }
                                 }
-
-                                await billByteReader.CloseAsync();
-
-                                _logger.LogInformation("Update Bill has Id = {0}", id.ToString());
                             }
                         }
                     }
-                }
 
-                await billReader.CloseAsync();
+                    await billReader.CloseAsync();
+                }
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError("Error Post Data: {0}", ex);
             }
         }
 
